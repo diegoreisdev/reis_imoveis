@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CidadeController extends Controller
 {
     public function index()
     {
-        $cidades= ['Aracaju', 'Cícero Dantas'];
+        $cidades = Cidade::all();
         return view('admin.cidades.index', compact('cidades'));
     }
 
@@ -19,8 +21,10 @@ class CidadeController extends Controller
     }
 
     public function store(Request $request)
-    {
-        //
+    {   
+        Cidade::create($request->all());
+        $request->session()->flash('sucesso', "A cidade $request->nome foi adicionada com sucesso!");
+        return Redirect::route('admin.cidades.index');
     }
 
     public function show($id)
