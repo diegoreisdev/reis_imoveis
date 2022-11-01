@@ -43,8 +43,10 @@ class CidadeController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        Cidade::destroy($id);
+        $request->session()->flash('sucesso', "Cidadee excluída com sucesso!");
+        return Redirect::route('admin.cidades.index');
     }
 }
