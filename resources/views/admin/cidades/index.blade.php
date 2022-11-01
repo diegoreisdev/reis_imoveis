@@ -24,5 +24,10 @@
         </tbody>
 
     </table>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large waves-effect waves-light" href="">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 </section>
 @endsection

@@ -10,10 +10,11 @@ return new class extends Migration
     {
         Schema::create('cidades', function (Blueprint $table) {
             $table->id();
+            $table->string('nome', 100)->unique();
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('cidades');

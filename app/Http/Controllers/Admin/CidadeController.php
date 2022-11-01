@@ -15,7 +15,7 @@ class CidadeController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.cidades.form');
     }
 
     public function store(Request $request)
