@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CidadeRequest;
 use App\Models\Cidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -20,7 +21,7 @@ class CidadeController extends Controller
         return view('admin.cidades.form');
     }
 
-    public function store(Request $request)
+    public function store(CidadeRequest $request)
     {   
         Cidade::create($request->all());
         $request->session()->flash('sucesso', "A cidade $request->nome foi adicionada com sucesso!");

@@ -2,13 +2,15 @@
 
 @section('conteudo-principal')
 
-<section class="section">
+<section class="section">    
     <form action="{{route('admin.cidades.store')}}" method="POST">
         @csrf
         <div class="input-field">
             <input type="text" name="nome" id="nome">
             <label for="nome">Nome</label>
-
+            @error('nome')
+                <span class="red-text text-accent-3">{{$message}}</span>
+            @enderror
         </div>
 
         <div class="right-align">
@@ -17,7 +19,6 @@
                 Salvar
             </button>
         </div>
-
     </form>
 </section>
 
