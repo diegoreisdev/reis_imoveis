@@ -18,8 +18,9 @@ class CidadeController extends Controller
 
     public function create()
     {
+        $title = 'Adicionar Cidade -';
         $action = route('admin.cidades.store');
-        return view('admin.cidades.form', compact('action'));
+        return view('admin.cidades.form', compact('action', 'title'));
     }
 
     public function store(CidadeRequest $request)
@@ -29,16 +30,12 @@ class CidadeController extends Controller
         return Redirect::route('admin.cidades.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
+        $title = 'Atualizar Cidade -';
         $cidade = Cidade::find($id);
         $action = route('admin.cidades.update', $cidade->id);
-        return view('admin.cidades.form', compact('action', 'cidade'));
+        return view('admin.cidades.form', compact('action', 'cidade', 'title'));
     }
 
     public function update(CidadeRequest $request, $id)

@@ -14,7 +14,7 @@ class CidadeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|min:3|max:50|unique:cidades'
+            'nome' => "required|min:3|max:50|unique:cidades,nome,$this->cidade"
         ];
     }
 }
