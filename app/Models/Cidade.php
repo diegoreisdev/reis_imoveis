@@ -12,5 +12,8 @@ class Cidade extends Model
     protected $table = 'cidades';
     protected $fillable = ['nome'];
 
-    public $timestamps = false;
+    public function imoveis()
+    {
+        return $this->hasMany(Imovel::class);
+    }
 }

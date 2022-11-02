@@ -10,4 +10,9 @@ class Finalidade extends Model
     use HasFactory;
 
     protected $table = 'finalidades';
+    
+    public function imoveis()
+    {
+        return $this->hasMany(Imovel::class);
+    }
 }

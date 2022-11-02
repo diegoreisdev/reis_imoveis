@@ -10,4 +10,9 @@ class Endereco extends Model
     use HasFactory;
 
     protected $table = 'enderecos';
+
+    public function imovel()
+    {
+        return $this->belongsTo(Imovel::class);
+    }
 }
