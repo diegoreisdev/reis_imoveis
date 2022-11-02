@@ -3,10 +3,14 @@
 @section('conteudo-principal')
 
 <section class="section">    
-    <form action="{{route('admin.cidades.store')}}" method="POST">
+    <form action="{{$action}}" method="POST">
         @csrf
+        @isset($cidade)
+            @method('PUT')
+        @endisset
+        
         <div class="input-field">
-            <input type="text" name="nome" id="nome">
+            <input type="text" name="nome" id="nome" value="{{old('nome', $cidade->nome ?? '')}}" autofocus>
             <label for="nome">Nome</label>
             @error('nome')
                 <span class="red-text text-accent-3">{{$message}}</span>
@@ -14,7 +18,7 @@
         </div>
 
         <div class="right-align">
-            <a href="{{url()->previous()}}" class="btn-flat waves-effect">Cancelar</a>
+            <a href="{{route('admin.cidades.index')}}" class="btn-flat waves-effect">Cancelar</a>
             <button class="btn waves-effect waves-light" type="submit">
                 Salvar
             </button>

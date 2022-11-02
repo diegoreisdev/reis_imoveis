@@ -18,11 +18,12 @@ class CidadeController extends Controller
 
     public function create()
     {
-        return view('admin.cidades.form');
+        $action = route('admin.cidades.store');
+        return view('admin.cidades.form', compact('action'));
     }
 
     public function store(CidadeRequest $request)
-    {   
+    {
         Cidade::create($request->all());
         $request->session()->flash('sucesso', "A cidade $request->nome foi adicionada com sucesso!");
         return Redirect::route('admin.cidades.index');
@@ -35,18 +36,23 @@ class CidadeController extends Controller
 
     public function edit($id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $action = route('admin.cidades.update', $cidade->id);
+        return view('admin.cidades.form', compact('action', 'cidade'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CidadeRequest $request, $id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $cidade->update($request->all());
+        $request->session()->flash('sucesso', "A cidade $cidade->nome foi atualizada com sucesso!");
+        return Redirect::route('admin.cidades.index');
     }
 
     public function destroy(Request $request, $id)
     {
         Cidade::destroy($id);
-        $request->session()->flash('sucesso', "Cidadee excluída com sucesso!");
+        $request->session()->flash('sucesso', "Cidade excluída com sucesso!");
         return Redirect::route('admin.cidades.index');
     }
 }
