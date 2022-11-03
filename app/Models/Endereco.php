@@ -11,6 +11,13 @@ class Endereco extends Model
 
     protected $table = 'enderecos';
 
+    protected $fillable = [
+        'rua',
+        'bairro',
+        'numero',
+        'complemento'
+    ];
+
     public function imovel()
     {
         return $this->belongsTo(Imovel::class);

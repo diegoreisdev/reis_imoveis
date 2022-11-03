@@ -33,14 +33,14 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="2">Nenhuma cidade encontrada</td>
+                    <td colspan="2" class="orange-text center-align"><h6>Nenhuma cidade encontrada</h6></td>
                 </tr>
             @endforelse
         </tbody>
 
     </table>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large waves-effect waves-light" href="{{route('admin.cidades.create')}}">
+        <a class="btn-floating btn-large waves-effect waves-light cyan pulse orange darken-4" href="{{route('admin.cidades.create')}}">
             <i class="large material-icons">add</i>
         </a>
     </div>
