@@ -16,7 +16,8 @@ class ImovelController extends Controller
 {
     public function index()
     {
-        return view('admin.imoveis.index');
+        $imoveis = Imovel::with(['cidade', 'endereco'])->get();
+        return view('admin.imoveis.index', compact('imoveis'));
     }
 
     public function create()
