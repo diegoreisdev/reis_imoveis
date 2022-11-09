@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImovelRequest;
 use App\Models\Cidade;
 use App\Models\Finalidade;
 use App\Models\Imovel;
@@ -16,7 +17,12 @@ class ImovelController extends Controller
 {
     public function index()
     {
-        $imoveis = Imovel::with(['cidade', 'endereco'])->get();
+        $imoveis = Imovel::join('cidades', 'cidades.id', '=', 'imoveis.cidade_id')
+                        ->join('enderecos', 'enderecos.imovel_id', '=', 'imoveis.id')
+                        ->orderBy('cidades.nome', 'asc')
+                        ->orderBy('enderecos.bairro', 'asc')
+                        ->orderBy('titulo', 'asc')
+                        ->get();
         return view('admin.imoveis.index', compact('imoveis'));
     }
 
@@ -31,7 +37,7 @@ class ImovelController extends Controller
         return view('admin.imoveis.form', compact('title', 'action', 'cidades', 'tipos', 'finalidades', 'proximidades'));
     }
 
-    public function store(Request $request)
+    public function store(ImovelRequest $request)
     {
         DB::beginTransaction();
         $imovel = Imovel::create($request->all());
@@ -56,7 +62,7 @@ class ImovelController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(ImovelRequest $request, $id)
     {
         //
     }
