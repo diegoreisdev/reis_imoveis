@@ -40,12 +40,12 @@ class ImovelController extends Controller
     public function store(ImovelRequest $request)
     {
         DB::beginTransaction();
-        $imovel = Imovel::create($request->all());
-        $imovel->endereco()->create($request->all());
+            $imovel = Imovel::create($request->all());
+            $imovel->endereco()->create($request->all());
 
-        if($request->has('proximidades')){
-            $imovel->proximidades()->sync($request->proximidades);
-        }
+            if($request->has('proximidades')){
+                $imovel->proximidades()->sync($request->proximidades);
+            }
         DB::commit();
 
         $request->session()->flash('sucesso', "O imóvel foi adicionada com sucesso!");
@@ -59,16 +59,44 @@ class ImovelController extends Controller
 
     public function edit($id)
     {
-        //
+        $imovel = Imovel::with(['cidade', 'endereco', 'finalidade', 'tipo', 'proximidades'])->find($id);
+        $cidades = Cidade::all();
+        $tipos = Tipo::all();
+        $finalidades = Finalidade::all();
+        $proximidades = Proximidade::all();
+        $title = 'Atualizar imóvel -';
+        $action = route('admin.imoveis.update', $imovel->id);
+        return view('admin.imoveis.form', compact('imovel', 'title', 'action', 'cidades', 'tipos', 'finalidades', 'proximidades'));
     }
 
     public function update(ImovelRequest $request, $id)
     {
-        //
+        $imovel = Imovel::find($id);
+
+        DB::beginTransaction();
+            $imovel->update($request->all());
+            $imovel->endereco->update($request->all());
+
+            if($request->has('proximidades')){
+                $imovel->proximidades()->sync($request->proximidades);       
+            }
+        DB::commit();
+
+        $request->session()->flash('sucesso', "Imóvel atualizado com sucesso!");
+        return Redirect::route('admin.imoveis.index');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $imovel = Imovel::find($id);
+
+        DB::beginTransaction();
+            // Remover o endereço
+            $imovel->endereco->delete();
+            // Remover o imóvel
+            $imovel->delete();
+        DB::commit();
+        $request->session()->flash('sucesso', "Imóvel excluído com sucesso!");
+        return Redirect::route('admin.imoveis.index');
     }
 }
