@@ -54,7 +54,7 @@ class ImovelRequest extends FormRequest
     {
         return [
             'finalidade_id.required' => 'Por favor, selecione uma opção',
-            'required' => 'Por favor, preencha o campo :attribute'
+            'required'               => 'Por favor, preencha  o   campo :attribute'
         ];
     }
 }

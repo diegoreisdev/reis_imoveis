@@ -54,7 +54,13 @@ class ImovelController extends Controller
 
     public function show($id)
     {
-        //
+        $imovel = Imovel::with(['cidade', 'endereco', 'finalidade', 'tipo', 'proximidades'])->find($id);
+        $cidades = Cidade::all();
+        $tipos = Tipo::all();
+        $finalidades = Finalidade::all();
+        $proximidades = Proximidade::all();
+        $title = 'Detalhes do imóvel -';
+        return view('admin.imoveis.show', compact('imovel', 'title', 'cidades', 'tipos', 'finalidades', 'proximidades'));
     }
 
     public function edit($id)
