@@ -19,10 +19,12 @@
                         <td>{{$imovel->endereco->bairro}}</td>
                         <td>{{$imovel->titulo}}</td>
                         <td class="right-align">
+                            {{-- Fotos --}}
+                            <a href="{{route('admin.imoveis.fotos.index', $imovel->id)}}" title="Fotos"><span><i class="material-icons green-text">insert_photo</i></span></a>
                             {{-- Ver --}}
-                            <a href="{{route('admin.imoveis.show', $imovel->id)}}" title="Ver"><span> <i class="material-icons indigo-text">remove_red_eye</i></span></a>
+                            <a href="{{route('admin.imoveis.show', $imovel->id)}}" title="Ver"><span><i class="material-icons indigo-text">remove_red_eye</i></span></a>
                             {{-- Editar --}}
-                            <a href="{{route('admin.imoveis.edit', $imovel->id)}}" title="Editar"><span> <i class="material-icons blue-text">edit</i></span></a>
+                            <a href="{{route('admin.imoveis.edit', $imovel->id)}}" title="Editar"><span><i class="material-icons blue-text">edit</i></span></a>
                             {{-- Excluir --}}
                             <form action="{{route('admin.imoveis.destroy', $imovel->id)}}" title="Excluir" method="POST" style="display: inline">
                                 @method('DELETE')

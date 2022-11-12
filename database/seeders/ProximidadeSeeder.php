@@ -19,7 +19,6 @@ class ProximidadeSeeder extends Seeder
         Proximidade::create(['nome' => 'Banco']);
         Proximidade::create(['nome' => 'Bombeiro']);
         Proximidade::create(['nome' => 'Cinema']);
-        Proximidade::create(['nome' => 'Cinema']);
         Proximidade::create(['nome' => 'Clínica Médica']);
         Proximidade::create(['nome' => 'Correios']);
         Proximidade::create(['nome' => 'Escola']);
