@@ -7,7 +7,8 @@ use App\Models\Foto;
 use App\Models\Imovel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Storage;
+use Image;
 class FotoController extends Controller
 {
     public function index($idImovel)
@@ -29,8 +30,12 @@ class FotoController extends Controller
         if ($request->hasFile('foto')) {
             //Checar se não ouve erro no upload da imagem
             if ($request->foto->isValid()) {
-                //Armazenando  o arquivo  no disco público
-                $fotoUrl = $request->foto->store("imoveis/$idImovel", 'public');
+                //Caminho e nome do arquivo para salvar no disco
+                $fotoUrl = $request->foto->hashName("imoveis/$idImovel");                
+                //Redimensionar a imagem
+                $imagem = Image::make($request->foto)->fit(env('FOTO_LARGURA'), env('FOTO_ALTURA'));
+                //Salvar no disco
+                Storage::disk('public')->put($fotoUrl, $imagem->encode());
                 //Armazenando o caminho do DB
                 $foto = new Foto();
                 $foto->url = $fotoUrl;
