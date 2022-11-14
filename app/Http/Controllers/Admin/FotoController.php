@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FotoRequest;
 use App\Models\Foto;
 use App\Models\Imovel;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class FotoController extends Controller
         return view('admin.imoveis.fotos.form', compact('imovel'));
     }
 
-    public function store(Request $request, $idImovel)
+    public function store(FotoRequest $request, $idImovel)
     {
         //Checar se veio o arquivo na requisição
         if ($request->hasFile('foto')) {

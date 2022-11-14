@@ -16,10 +16,13 @@
                 <div class="file-path-wrapper">
                     <input type="text" class="file-path validate">
                 </div>
+                @error('foto')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
             </div>
                 {{-- Cancelar/Salvar --}}
             <div class="right-align">
-                <a class="btn-flat waves-effect" href="{{url()->previous()}}">Cancelar</a>
+                <a class="btn-flat waves-effect" href="{{route('admin.imoveis.index')}}">Cancelar</a>
                 <button class="btn waves-effect waves-light" type="submit">Salvar</button>
             </div>
         </form>
