@@ -26,10 +26,10 @@
                             {{-- Editar --}}
                             <a href="{{route('admin.imoveis.edit', $imovel->id)}}" title="Editar"><span><i class="material-icons blue-text">edit</i></span></a>
                             {{-- Excluir --}}
-                            <form action="{{route('admin.imoveis.destroy', $imovel->id)}}" title="Excluir" method="POST" style="display: inline">
+                            <form class="form-delete" action="{{route('admin.imoveis.destroy', $imovel->id)}}" title="Excluir" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button style="border:0; background:transparent;" type="submit"><span style="cursor: pointer"><i class="material-icons red-text">delete_forever</i></span></button>                    
+                                <button class="btn-delete" type="submit"><span class="span-delete"><i class="material-icons red-text btn-delete">delete_forever</i></span></button>                    
                             </form>
                         </td>
                     </tr>

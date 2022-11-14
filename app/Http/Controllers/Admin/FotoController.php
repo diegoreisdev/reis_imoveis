@@ -49,8 +49,14 @@ class FotoController extends Controller
         return Redirect::route('admin.imoveis.fotos.index', $idImovel);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $idImovel, $idFoto)
     {
-        //
+        $foto = Foto::find($idFoto);
+        //Apagar a imagem no disco
+        Storage::disk('public')->delete($foto->url);
+        //Apagaro registro no DB
+        $foto->delete();
+        $request->session()->flash('sucesso', 'Foto excluída com sucesso!');
+        return Redirect::route('admin.imoveis.fotos.index', $idImovel);
     }
 }

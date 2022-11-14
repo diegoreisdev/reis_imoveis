@@ -20,11 +20,11 @@
                                 <i class="material-icons blue-text">edit</i>
                             </span>
                         </a>
-                        <form action="{{route('admin.cidades.destroy', $cidade->id)}}" method="POST" style="display: inline">
+                        <form class="form-delete" action="{{route('admin.cidades.destroy', $cidade->id)}}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button style="border:0; background:transparent;" type="submit">
-                                <span style="cursor: pointer">
+                                <span class="span-delete">
                                     <i class="material-icons red-text">delete_forever</i>
                                 </span>
                             </button>                    
