@@ -34,7 +34,7 @@ class ImovelController extends Controller
             $imoveis->where('titulo', 'LIKE', "%$titulo%");
         }
         //Pegando os dados retornados a partir da execução da query
-        $imoveis = $imoveis->get();
+        $imoveis = $imoveis->paginate(env('PAGINATE'))->withQueryString();
         $cidades = Cidade::orderBy('nome')->get();
         return view('admin.imoveis.index', compact('imoveis', 'cidades', 'cidade_id', 'titulo'));
     }

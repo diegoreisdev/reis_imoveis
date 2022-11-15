@@ -30,7 +30,7 @@
     <hr>
     {{-- Lista de Imóveis --}}
     <section class="section">
-        <table class="higt-light">
+        <table class="highlight">
             <thead>
                 <tr>
                     <th>Cidade</th>
@@ -67,6 +67,7 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="center">{{$imoveis->links('shared.pagination')}}</div>
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large waves-effect waves-light cyan pulse orange darken-4" href="{{route('admin.imoveis.create')}}">
                 <i class="large material-icons">add</i>
