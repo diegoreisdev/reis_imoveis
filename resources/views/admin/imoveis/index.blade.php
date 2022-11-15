@@ -1,7 +1,34 @@
 @extends('admin.layouts.principal')
 
 @section('conteudo-principal')
-
+    {{-- Filtro de Pesquisa --}}
+    <section class="section">
+        <form action="{{route('admin.imoveis.index')}}" method="GET">
+            <div class="row align-wrapper">
+                {{-- Cidade --}}
+                <div class="input-field col s6">
+                    <select name="cidade_id" id="cidade_id">
+                        <option value="">Selecione uma cidade</option>
+                        @foreach ($cidades as $cidade)
+                            <option value="{{$cidade->id}}" {{$cidade->id == $cidade_id ? 'selected' : ''}}>{{$cidade->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                {{-- Título --}}
+                <div class="input-field col s6">
+                    <input type="text" name="titulo" id="titulo" value="{{$titulo}}">
+                    <label for="titulo">Título</label>
+                </div>
+            </div>
+            {{-- Pesquisar Título --}}
+            <div class="row right-align">
+                <a href="{{route('admin.imoveis.index')}}" class="btn-flat waves-effect">Exibir todos</a>
+                <button type="submit" class="btn waves-effect waves-light">Pesquisar</button>
+            </div>
+        </form>
+    </section>
+    <hr>
+    {{-- Lista de Imóveis --}}
     <section class="section">
         <table class="higt-light">
             <thead>

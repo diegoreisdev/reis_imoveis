@@ -22,7 +22,7 @@
             </div>
                 {{-- Cancelar/Salvar --}}
             <div class="right-align">
-                <a class="btn-flat waves-effect" href="{{route('admin.imoveis.index')}}">Cancelar</a>
+                <a class="btn-flat waves-effect" href="{{route('admin.imoveis.fotos.index', $imovel->id)}}">Cancelar</a>
                 <button class="btn waves-effect waves-light" type="submit">Salvar</button>
             </div>
         </form>

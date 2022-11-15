@@ -15,15 +15,28 @@ use Illuminate\Support\Facades\Redirect;
 
 class ImovelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $imoveis = Imovel::join('cidades', 'cidades.id', '=', 'imoveis.cidade_id')
                         ->join('enderecos', 'enderecos.imovel_id', '=', 'imoveis.id')
                         ->orderBy('cidades.nome', 'asc')
                         ->orderBy('enderecos.bairro', 'asc')
-                        ->orderBy('titulo', 'asc')
-                        ->get();
-        return view('admin.imoveis.index', compact('imoveis'));
+                        ->orderBy('titulo', 'asc');
+
+        $cidade_id = $request->cidade_id;
+        $titulo = $request->titulo;
+        //Filtro Cidade
+        if ($cidade_id) {
+            $imoveis->where('cidades.id', $cidade_id);
+        }
+        //Filtro Título
+        if ($titulo) {
+            $imoveis->where('titulo', 'LIKE', "%$titulo%");
+        }
+        //Pegando os dados retornados a partir da execução da query
+        $imoveis = $imoveis->get();
+        $cidades = Cidade::orderBy('nome')->get();
+        return view('admin.imoveis.index', compact('imoveis', 'cidades', 'cidade_id', 'titulo'));
     }
 
     public function create()
@@ -40,12 +53,12 @@ class ImovelController extends Controller
     public function store(ImovelRequest $request)
     {
         DB::beginTransaction();
-            $imovel = Imovel::create($request->all());
-            $imovel->endereco()->create($request->all());
+        $imovel = Imovel::create($request->all());
+        $imovel->endereco()->create($request->all());
 
-            if($request->has('proximidades')){
-                $imovel->proximidades()->sync($request->proximidades);
-            }
+        if ($request->has('proximidades')) {
+            $imovel->proximidades()->sync($request->proximidades);
+        }
         DB::commit();
 
         $request->session()->flash('sucesso', "O imóvel foi adicionada com sucesso!");
@@ -80,12 +93,12 @@ class ImovelController extends Controller
         $imovel = Imovel::find($id);
 
         DB::beginTransaction();
-            $imovel->update($request->all());
-            $imovel->endereco->update($request->all());
+        $imovel->update($request->all());
+        $imovel->endereco->update($request->all());
 
-            if($request->has('proximidades')){
-                $imovel->proximidades()->sync($request->proximidades);       
-            }
+        if ($request->has('proximidades')) {
+            $imovel->proximidades()->sync($request->proximidades);
+        }
         DB::commit();
 
         $request->session()->flash('sucesso', "Imóvel atualizado com sucesso!");
@@ -97,10 +110,10 @@ class ImovelController extends Controller
         $imovel = Imovel::find($id);
 
         DB::beginTransaction();
-            // Remover o endereço
-            $imovel->endereco->delete();
-            // Remover o imóvel
-            $imovel->delete();
+        // Remover o endereço
+        $imovel->endereco->delete();
+        // Remover o imóvel
+        $imovel->delete();
         DB::commit();
         $request->session()->flash('sucesso', "Imóvel excluído com sucesso!");
         return Redirect::route('admin.imoveis.index');
