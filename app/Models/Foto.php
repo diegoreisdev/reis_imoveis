@@ -9,4 +9,9 @@ class Foto extends Model
 {
     use HasFactory;
     protected $table = 'fotos';
+
+    public function imoveis()
+    {
+        return $this->belongsTo(Imovel::class);
+    }
 }

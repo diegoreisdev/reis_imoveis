@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-
+use Illuminate\Database\DBAL\TimestampType;
 return [
 
     /*
@@ -213,5 +213,12 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
+
+
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],
 
 ];

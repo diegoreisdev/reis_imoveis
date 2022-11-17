@@ -1,11 +1,11 @@
-@extends('admin.layouts.principal')
+@extends('site.layouts.site')
 
 @section('conteudo-principal')
 
 <h4>{{$imovel->titulo}}</h4>
 
 <section class="section">
-        {{-- Cidade --}}
+    {{-- Cidade --}}
     <div class="row">
         <span class="col s12">
             <h5 class="orange-text">Cidade</h5>
@@ -22,12 +22,12 @@
             <p>{{$imovel->finalidade->nome}}</p>
         </span>
     </div>
-    
+
     {{-- Valor, Dormitórios e Salas --}}
     <div class="row">
         <span class="col s4">
             <h5 class="orange-text">Valor</h5>
-            <p>{{$imovel->preco}}</p>
+            <p>{{ $imovel->preco }}</p>
         </span>
         <span class="col s4">
             <h5 class="orange-text">Dormitórios</h5>
@@ -76,8 +76,7 @@
             </p>
         </span>
     </div>
-
-    {{-- Descrição --}}
+    {{-- Descrção --}}
     <div class="row">
         <span class="col s12">
             <h5 class="orange-text">Descrição</h5>
@@ -85,9 +84,21 @@
         </span>   
     </div>
 
+    {{-- Imagens do Imóvel --}}
+    <h4 class="center orange-text">Imagens do Imóvel</h4>
+    <div class="imagem-show">
+        @forelse ( $imovel->fotos as $foto )
+            <img class="materialboxed" style="margin:5px" width="195" height="130" src="{{asset("storage/{$foto->url}")}}">            
+        @empty
+            <div class="row center">Não existem fotos para esse imóvel</div>
+        @endforelse 
+    </div>
+
     {{-- Voltar --}}
     <div class="right-align">
-        <a href="{{route('admin.imoveis.index')}}" class="btn-flat waves-effect">Voltar</a>
+        <a href="{{url()->previous()}}" class="btn-flat waves-effect">Voltar</a>
     </div>
+    
 </section>
+
 @endsection

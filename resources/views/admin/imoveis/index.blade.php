@@ -61,9 +61,9 @@
                         </td>
                     </tr>
                 @empty
-                <tr>
-                    <td colspan="4" class="orange-text center-align"><h6>Nenhum imóvel encontrado</h6></td>
-                </tr>
+                    <tr>
+                        <td colspan="4" class="orange-text center-align"><h6>Nenhum imóvel encontrado</h6></td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

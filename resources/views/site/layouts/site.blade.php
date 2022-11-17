@@ -36,12 +36,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-            var slid = document.querySelectorAll('.slider');
-
+            /* Slider */
+            var slid = document.querySelectorAll('.slider');            
             M.Slider.init(slid, {
                 indicators: false,
                 height: 400,
             });
+            
+            /* Material Box/ Ampliar Imagem */
+            var elems = document.querySelectorAll('.materialboxed');
+            M.Materialbox.init(elems);
+        
         })
     </script>
 </body>

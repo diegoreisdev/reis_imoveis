@@ -50,4 +50,9 @@ class Imovel extends Model
     {
         return $this->belongsToMany(Proximidade::class)->withTimestamps();
     }
+
+    public function fotos()
+    {
+        return $this->hasMany(Foto::class);
+    }
 }

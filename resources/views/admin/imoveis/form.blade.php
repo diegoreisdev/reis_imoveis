@@ -70,7 +70,7 @@
              {{-- Valor| Dormitórios| Salas --}}
             <div class="row">
                 <div class="input-field col s4">
-                    <input type="number" name="preco" id="preco" value="{{old('preco', $imovel->preco ?? '')}}">
+                    <input type="text" name="preco" id="preco" value="{{old('preco', $imovel->preco ?? '')}}">
                     <label for="preco">Valor</label>
                     @error('preco')
                         <span class="red-text text-accent-3">{{$message}}</span>
@@ -90,9 +90,9 @@
                         <span class="red-text text-accent-3">{{$message}}</span>
                     @enderror
                 </div>
-             </div>
+            </div>
 
-              {{-- Terreno| Banheiros| Garagens --}}
+            {{-- Terreno| Banheiros| Garagens --}}
             <div class="row">
                 <div class="input-field col s4">
                     <input type="number" name="terreno" id="terreno" value="{{old('terreno', $imovel->terreno ?? '')}}">
@@ -115,76 +115,76 @@
                         <span class="red-text text-accent-3">{{$message}}</span>
                     @enderror
                 </div>
-             </div>
+            </div>
 
-             {{-- Descrição --}}
-             <div class="row">
+            {{-- Descrição --}}
+            <div class="row">
+            <div class="input-field col s12">
+                <textarea name="descricao" id="descricao" class="materialize-textarea">{{old('descricao', $imovel->descricao ?? '')}}</textarea>
+                <label for="descricao">Descrição</label>
+                @error('descricao')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
+            </div>
+            </div>
+
+            {{-- Endereço --}}
+            <div class="row">
+            <div class="input-field col s5">
+                <input type="text" name="rua" id="rua" value="{{old('rua', $imovel->endereco->rua ?? '')}}">
+                <label for="rua">Rua</label>
+                @error('rua')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="input-field col s2">
+                <input type="number" name="numero" id="numero" value="{{old('numero', $imovel->endereco->numero ?? '')}}">
+                <label for="numero">Número</label>
+                @error('numero')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="input-field col s2">
+                <input type="text" name="complemento" id="complemento" value="{{old('complemento', $imovel->endereco->complemento ?? '')}}">
+                <label for="complemento">Complemento</label>
+                @error('complemento')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="input-field col s3">
+                <input type="text" name="bairro" id="bairro" value="{{old('bairro', $imovel->endereco->bairro ?? '')}}">
+                <label for="bairro">Bairro</label>
+                @error('bairro')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
+            </div>
+            </div>
+
+            {{-- Proximidades --}}
+            <div class="row">
                 <div class="input-field col s12">
-                    <textarea name="descricao" id="descricao" class="materialize-textarea">{{old('descricao', $imovel->descricao ?? '')}}</textarea>
-                    <label for="descricao">Descrição</label>
-                    @error('descricao')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
+                <select name="proximidades[]" id="proximidades" multiple>
+                    <option value="" disabled>Selecione os pontos de interesse nas proximidades</option>
+                    @foreach ($proximidades as $proximidade)
+                        <option value="{{$proximidade->id}}"
+                            @if (old('proximidades'))
+                                {{in_array($proximidade->id, old('proximidades', $imovel->proximidades ?? '')) ? 'selected' : ''}}
+                            @else
+                                @isset($imovel)
+                                    {{$imovel->proximidades->contains($proximidade->id) ? 'selected' : ''}}
+                                @endisset
+                            @endif   
+                        >{{$proximidade->nome}}</option>
+                    @endforeach
+                </select>
+                <label for="proximidades">Pontos de interesse nas proximidades</label>
+                @error('proximidades')
+                    <span class="red-text text-accent-3">{{$message}}</span>
+                @enderror
                 </div>
-             </div>
-
-             {{-- Endereço --}}
-             <div class="row">
-                <div class="input-field col s5">
-                    <input type="text" name="rua" id="rua" value="{{old('rua', $imovel->endereco->rua ?? '')}}">
-                    <label for="rua">Rua</label>
-                    @error('rua')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="input-field col s2">
-                    <input type="number" name="numero" id="numero" value="{{old('numero', $imovel->endereco->numero ?? '')}}">
-                    <label for="numero">Número</label>
-                    @error('numero')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="input-field col s2">
-                    <input type="text" name="complemento" id="complemento" value="{{old('complemento', $imovel->endereco->complemento ?? '')}}">
-                    <label for="complemento">Complemento</label>
-                    @error('complemento')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="input-field col s3">
-                    <input type="text" name="bairro" id="bairro" value="{{old('bairro', $imovel->endereco->bairro ?? '')}}">
-                    <label for="bairro">Bairro</label>
-                    @error('bairro')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
-                </div>
-             </div>
-
-             {{-- Proximidades --}}
-             <div class="row">
-                 <div class="input-field col s12">
-                    <select name="proximidades[]" id="proximidades" multiple>
-                        <option value="" disabled>Selecione os pontos de interesse nas proximidades</option>
-                        @foreach ($proximidades as $proximidade)
-                            <option value="{{$proximidade->id}}"
-                                @if (old('proximidades'))
-                                    {{in_array($proximidade->id, old('proximidades', $imovel->proximidades ?? '')) ? 'selected' : ''}}
-                                @else
-                                    @isset($imovel)
-                                        {{$imovel->proximidades->contains($proximidade->id) ? 'selected' : ''}}
-                                    @endisset
-                                @endif   
-                            >{{$proximidade->nome}}</option>
-                        @endforeach
-                    </select>
-                    <label for="proximidades">Pontos de interesse nas proximidades</label>
-                    @error('proximidades')
-                        <span class="red-text text-accent-3">{{$message}}</span>
-                    @enderror
-                 </div>
-             </div>
+            </div>
              
-             <div class="right-align">
+            <div class="right-align">
                 <a href="{{route('admin.imoveis.index')}}" class="btn-flat waves-effect">Cancelar</a>
                 <button class="btn waves-effect waves-light" type="submit">
                     Salvar

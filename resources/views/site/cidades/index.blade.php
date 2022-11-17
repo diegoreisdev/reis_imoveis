@@ -19,7 +19,7 @@
             <li>
                 <img src="https://source.unsplash.com/2gDwlIim3Uw">
                 <div class="caption left-align slide-foto">
-                    <h2 class="orange-text">Imóveis para venda</h2>
+                    <h2 class="orange-text">Imóveis á venda</h2>
                 </div>
             </li>
         </ul>
@@ -32,9 +32,11 @@
     <section class="section lighten-4 center">
         <div class="card-site">
             @foreach ($cidades as $cidade)
-                <div class="card-panel"><i class="material-icons medium green-text text-lighten-3">room</i>
-                    <h4 class="black-text">{{$cidade->nome}}</h4>
-                </div>
+                <a href="{{route('cidades.imoveis.index', $cidade->id)}}">
+                    <div class="card-panel"><i class="material-icons medium green-text text-lighten-3">room</i>
+                        <h4 class="black-text">{{$cidade->nome}}</h4>
+                    </div>
+                </a>
             @endforeach
         </div>
     </section>

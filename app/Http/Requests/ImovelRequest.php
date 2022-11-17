@@ -16,7 +16,7 @@ class ImovelRequest extends FormRequest
         return [
             'rua'           => 'required|min:3',
             'salas'         => 'required|integer',
-            'preco'         => 'required|numeric',
+            'preco'         => 'required|',
             'numero'        => 'required|integer',
             'titulo'        => 'required|min:3|max:100',
             'bairro'        => 'required|min:3|max:20',
