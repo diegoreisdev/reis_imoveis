@@ -53,10 +53,22 @@
                             {{-- Editar --}}
                             <a href="{{route('admin.imoveis.edit', $imovel->id)}}" title="Editar"><span><i class="material-icons blue-text">edit</i></span></a>
                             {{-- Excluir --}}
+                            {{-- Abrir Modal Estrutura --}}
+                            <a class="modal-trigger form-delete" href="#modal1"><span class="span-delete"><i class="material-icons red-text">delete_forever</i></span></a>
+                            {{-- Formnulário --}}
                             <form class="form-delete" action="{{route('admin.imoveis.destroy', $imovel->id)}}" title="Excluir" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn-delete" type="submit"><span class="span-delete"><i class="material-icons red-text btn-delete">delete_forever</i></span></button>                    
+                            {{-- Modal Estrutura --}}
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content center">
+                                        <h4>Tem certeza que deseja excluir o imóvel?</h4>                                    
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                        <button class="btn" type="submit">Excluir </button>                    
+                                    </div>
+                                </div>
                             </form>
                         </td>
                     </tr>

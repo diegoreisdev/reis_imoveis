@@ -20,14 +20,22 @@
                                 <i class="material-icons blue-text">edit</i>
                             </span>
                         </a>
-                        <form class="form-delete" action="{{route('admin.cidades.destroy', $cidade->id)}}" method="POST">
+                        {{-- Abrir Modal Estrutura --}}
+                        <a class="modal-trigger form-delete" href="#modal1"><span class="span-delete"><i class="material-icons red-text">delete_forever</i></span></a>
+                        {{-- Formnulário --}}
+                        <form class="form-delete" action="{{route('admin.cidades.destroy', $cidade->id)}}" method="POST">                            
                             @method('DELETE')
                             @csrf
-                            <button style="border:0; background:transparent;" type="submit">
-                                <span class="span-delete">
-                                    <i class="material-icons red-text">delete_forever</i>
-                                </span>
-                            </button>                    
+                           {{-- Modal Estrutura --}}
+                            <div id="modal1" class="modal">
+                                <div class="modal-content center">
+                                    <h4>Tem certeza que deseja excluir a cidade?</h4>                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                    <button class="btn red-btn" type="submit">Excluir </button>                    
+                                </div>
+                            </div>
                         </form>
                     </td>
                 </tr>
